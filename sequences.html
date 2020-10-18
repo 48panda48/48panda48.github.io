@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"><br/>
+
+<style>
+@webkit-keyframes hide-progress {
+0% {width:100%;}
+100% {width:0%;}
+}
+@keyframes hide-progress {
+0% {width:100%;}
+100% {width:0%;}
+}
+@moz-keyframes hide-progress {
+0% {width:100%;}
+100% {width:0%;}
+}
+@o-keyframes hide-progress {
+0% {width:100%;}
+100% {width:0%;}
+}
+.hide-progress {
+  -webkit-animation: hide-progress 3s ease;
+  -moz-animation:    hide-progress 3s ease;
+  -o-animation:      hide-progress 3s ease;
+  animation:         hide-progress 3s ease;
+}
+</style>
+</head>
+
+<body>
+<h2>Sequences Test</h2>
+<p>Select the types of sequence to use and press generate to generate a sequence. type the next term in the sequence into the box and if it's correct, a new question will be generated.</p>
+<a href="index.html" class="btn btn-primary">Back to menu</a>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="LinearCB" value="option1">
+  <label class="form-check-label" for="LinearCB">Linear</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="QuadraticCB" value="option2">
+  <label class="form-check-label" for="QuadraticCB">Quadratic</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="GeometricCB" value="option3">
+  <label class="form-check-label" for="GeometricCB">Geometric</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="FibonacciCB" value="option4">
+  <label class="form-check-label" for="FibonacciCB">Fibonacci</label>
+</div>
+<div id="error"></div>
+<button type="button" class="btn btn-outline-success" onclick="button()">Generate Question</button>
+<div class="card" style="width:60%;">
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="term1">Please</span>
+        <span class="input-group-text" id="term2">Generate</span>
+        <span class="input-group-text" id="term3">A</span>
+      </div>
+      <input type="number" class="form-control" id="answer">
+        <div class="input-group-append">
+          
+          <span class="input-group-text" id="type">Question</span>
+          <button class="btn btn-outline-success" type="button" id="Checker" onclick="check()">Check</button>
+        </div>
+    </div>
+  </div>
+<div class="progress">
+  <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+</div>
+</div>
+<script>
+var input = document.getElementById("answer");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("Checker").click();
+  }
+});
+correct=null
+function check() {
+if (correct == $("#answer").val()) {
+$("#answer").addClass("is-valid")
+$("#answer").removeClass("is-invalid")
+$("#progress").addClass("bg-success")
+$("#progress").removeClass("bg-danger")
+$("#progress").addClass("hide-progress")
+setTimeout(function() { button(); }, 3000);
+}
+else
+{
+$("#answer").addClass("is-invalid")
+$("#answer").removeClass("is-valid")
+$("#progress").removeClass("bg-success")
+$("#progress").addClass("bg-danger")
+}
+}
+function button() {
+$("#answer").removeClass("is-valid")
+$("#answer").removeClass("is-invalid")
+$("#progress").removeClass("bg-success")
+$("#progress").removeClass("bg-danger")
+$("#progress").removeClass("hide-progress")
+$("#answer").val("")
+linear = document.getElementById("LinearCB").checked
+quadratic = document.getElementById("QuadraticCB").checked
+geometric = document.getElementById("GeometricCB").checked
+fibonacci = document.getElementById("FibonacciCB").checked
+elements=[]
+if (linear) {elements.push(1)}
+if (quadratic) {elements.push(2)}
+if (geometric) {elements.push(3)}
+if (fibonacci) {elements.push(4)}
+console.log(elements)
+if (!elements[0]) {
+document.getElementById("error").innerHTML='<div class="alert alert-danger" role="alert"> \
+  Please select a question type! \
+</div>'
+}
+else 
+{
+document.getElementById("error").innerHTML=""
+}
+const randomSelection = elements[Math.floor(Math.random() * elements.length)];
+if (randomSelection == 1) {
+b=Math.floor(Math.random() * 100)
+a=Math.floor((Math.random() * 20)+1)*((Math.floor(Math.random() * 2)*2)-1)
+sequence=[b,a+b,a+a+b,a+a+a+b]
+$("#term1").html(sequence[0].toString())
+$("#term2").html(sequence[1].toString())
+$("#term3").html(sequence[2].toString())
+$("#type").html("Linear")
+correct=sequence[3]
+}
+if (randomSelection == 2) {
+c=Math.floor((Math.random() * 20)+1)*((Math.floor(Math.random() * 2)*2)-1)
+b=Math.floor((Math.random() * 7)+1)*((Math.floor(Math.random() * 2)*2)-1)
+a=Math.floor((Math.random() * 5)+1)*((Math.floor(Math.random() * 2)*2)-1)
+sequence=[a+b+c,a+a+a+a+b+b+c,a+a+a+a+a+a+a+a+a+b+b+b+c,a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+a+b+b+b+b+c]
+$("#term1").html(sequence[0].toString())
+$("#term2").html(sequence[1].toString())
+$("#term3").html(sequence[2].toString())
+$("#type").html("Quadratic")
+correct=sequence[3]
+}
+if (randomSelection == 3) {
+b=Math.floor((Math.random() * 6)+1)*((Math.floor(Math.random() * 2)*2)-1)
+a=Math.floor((Math.random() * 10)+1)*((Math.floor(Math.random() * 2)*2)-1)
+sequence=[a,a*b,a*b*b,a*b*b*b]
+$("#term1").html(sequence[0].toString())
+$("#term2").html(sequence[1].toString())
+$("#term3").html(sequence[2].toString())
+$("#type").html("Geometric")
+correct=sequence[3]
+}
+if (randomSelection == 4) {
+negative=((Math.floor(Math.random() * 2)*2)-1)
+b=Math.floor((Math.random() * 20)+1)*negative
+a=Math.floor((Math.random() * 20)+1)*negative
+sequence=[a,b,a+b,a+b+b]
+$("#term1").html(sequence[0].toString())
+$("#term2").html(sequence[1].toString())
+$("#term3").html(sequence[2].toString())
+$("#type").html("Fibonacci")
+correct=sequence[3]
+}
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

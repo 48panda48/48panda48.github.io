@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<style>
+.fix-label-group {
+  align-items: center;
+}
+
+.fix-label-item {
+  height: calc(2.25rem + 2px);
+}
+</style>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+<h2>Sum Substitution Problem</h2>
+<p>Use the dropdown menus to set the answer to the problem then click generate to find a problem that works (sometimes no problem can be found, or a problem can be found but it has other solutions if this happens it will say.)<br/>
+Alternatively, hide the answers and turn on the Randomise answers mode to generate a random problem at the press of a button.</p>
+<a href="index.html" class="btn btn-primary">Back to menu</a>
+
+<div class="collapse show" id="collapseExample">
+
+<form>
+  <div class="form-row">
+    <div class="col">
+      <div class="form-group">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        a = 
+      </div>
+    </div>
+    <select id="a" class="form-control selectpicker" data-live-search="true" data-size="10">
+      <option selected></option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+    </select>
+  </div>
+</div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        b = 
+      </div>
+    </div>
+    <select id="b" class="form-control selectpicker" data-live-search="true" data-size="10">
+      <option selected></option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+    </select>
+  </div>
+</div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        c = 
+      </div>
+    </div>
+    <select id="c" class="form-control selectpicker" data-live-search="true" data-size="10">
+      <option selected></option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+    </select>
+  </div>
+</div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        d = 
+      </div>
+    </div>
+    <select id="d" class="form-control selectpicker" data-live-search="true" data-size="10">
+      <option selected></option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+    </select>
+  </div>
+</div>
+    </div>
+  </div>
+</form></div>
+<button class="btn btn-outline-success" onclick="button()">Create Problem</button>
+<a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Hide/Show Answer
+  </a><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">Randomise answers (page might freeze for a few secs)</label>
+  <table id="result">
+
+</table>
+<div id="alert">
+</div>
+<script>
+function button() {
+  if (document.getElementById("defaultCheck1").checked) {
+  random()
+  }
+  else
+  {
+  create()
+  }
+}
+function random() {
+    done = false
+    while (!done) {
+    array=[1,2,3,4,5,6,7,8,9]
+    $("#a").val(array[Math.floor(Math.random() * array.length)])
+    $("#b").val(array[Math.floor(Math.random() * array.length)])
+    $("#c").val(array[Math.floor(Math.random() * array.length)])
+    $("#d").val(array[Math.floor(Math.random() * array.length)])
+    done = create()
+    }
+}
+function create() {
+    a = $("#a").val()
+    b = $("#b").val()
+    c = $("#c").val()
+    d = $("#d").val()
+    values = [a, b, c, d]
+    result = []
+    exit = false
+    abcd=[0,0,0,0,0,0,0,0,0,0]
+    abcd[a] = "a"
+    abcd[b] = "b"
+    abcd[c] = "c"
+    abcd[d] = "d"
+    stri=0
+    othersthatwork=[]
+    for (i_1 = 1; i_1 < 5; i_1++) {
+        for (i_2 = 1; i_2 < 5; i_2++) {
+            for (i_3 = 1; i_3 < 5; i_3++) {
+                for (i_4 = 1; i_4 < 5; i_4++) {
+                    for (i_5 = 1; i_5 < 5; i_5++) {
+                        for (i_6 = 1; i_6 < 5; i_6++) {
+                            for (i_7 = 1; i_7 < 5; i_7++) {
+                                for (i_8 = 1; i_8 < 5; i_8++) {
+                                    stri = (1000 * values[i_1 - 1] + 100 * values[i_2 - 1] + 10 * values[i_3 - 1] + 1 * values[i_4 - 1] + 1000 * values[i_5 - 1] + 100 * values[i_6 - 1] + 10 * values[i_7 - 1] + 1 * values[i_8 - 1]);
+                                    if (stri.toString().padStart(5,"0").substring(1).replace(a.toString(), "").replace(b.toString(), "").replace(c.toString(), "").replace(d.toString(), "") == "") {
+                                        resultprevious=Array.from(result);
+                                        result = [values[i_1 - 1], values[i_2 - 1], values[i_3 - 1], values[i_4 - 1], values[i_5 - 1], values[i_6 - 1], values[i_7 - 1], values[i_8 - 1]]
+                                        if (result.includes(a)&&result.includes(b)&&result.includes(c)&&result.includes(d)) {
+                                            othersthatwork=[]
+                                            amount=0
+                                            jeff=[1,2,3,4,5,6,7,8]
+                                            bob=[]
+                                            ender=parseInt(result[0]+result[1]+result[2]+result[3],10) + parseInt(result[4]+result[5]+result[6]+result[7],10)
+                                            ender = ender.toString().padStart(5,"0")
+                                            answer=ender.charAt(0)+abcd[parseInt(ender.charAt(1))]+abcd[parseInt(ender.charAt(2))]+abcd[parseInt(ender.charAt(3))]+abcd[parseInt(ender.charAt(4))]
+                                            jeff[0]=abcd[result[0]]
+                                            jeff[1]=abcd[result[1]]
+                                            jeff[2]=abcd[result[2]]
+                                            jeff[3]=abcd[result[3]]
+                                            jeff[4]=abcd[result[4]]
+                                            jeff[5]=abcd[result[5]]
+                                            jeff[6]=abcd[result[6]]
+                                            jeff[7]=abcd[result[7]]
+                                            for (a_=1;a_<10;a_++) {
+                                            for (b_=1;b_<10;b_++) {
+                                            for (c_=1;c_<10;c_++) {
+                                            for (d_=1;d_<10;d_++) {
+                                            bob=Array.from(jeff);
+                                            for (i=0;i<8;i++) {
+                                            bob[i]=parseInt(bob[i].toString().replace("a",a_).replace("b",b_).replace("c",c_).replace("d",d_))
+                                            }
+                                            if (parseInt(ender.replace("a",a_).replace("b",b_).replace("c",c_).replace("d",d_),10)==parseInt(""+bob[0]+bob[1]+bob[2]+bob[3],10)+parseInt(""+bob[4]+bob[5]+bob[6]+bob[7],10)) {
+                                            amount=amount+1
+                                            othersthatwork.push("a="+a_+", b="+b_+", c="+c_+", d="+d_)
+                                            }
+                                            }
+                                            }
+                                            }
+                                            }
+                                            console.log(amount)
+                                            if (amount==1){
+                                            exit = true
+                                            break}
+                                        } else {
+                                            result = resultprevious
+                                        }
+                                    }
+                                }
+                                if (exit) {
+                                    break;
+                                }
+                            }
+                            if (exit) {
+                                break;
+                            }
+                        }
+                        if (exit) {
+                            break;
+                        }
+                    }
+                    if (exit) {
+                        break;
+                    }
+                }
+                if (exit) {
+                    break;
+                }
+            }
+            if (exit) {
+                break;
+            }
+        }
+        if (exit) {
+            break;
+        }
+        a
+    }
+    console.log(othersthatwork)
+    if (othersthatwork.length>=1) {
+    console.log(result)
+    end=1000 * parseInt(result[0],10) + 100 * parseInt(result[1],10) + 10 * parseInt(result[2],10) + parseInt(result[3],10) + 1000 * parseInt(result[4],10) + 100 * parseInt(result[5],10) + 10 * parseInt(result[6],10) + parseInt(result[7],10)
+    console.log(end)
+    end = end.toString().padStart(5,"0")
+    table= "<tr><td></td><td>"+abcd[result[0]]+"</td><td>"+abcd[result[1]]+"</td><td>"+abcd[result[2]]+"</td><td>"+abcd[result[3]]+"</td></tr>\n<tr><td>+</td><td>"+abcd[result[4]]+"</td><td>"+abcd[result[5]]+"</td><td>"+abcd[result[6]]+"</td><td>"+abcd[result[7]]+"</td></tr>\n<tr><td>"+end.charAt(0)+"</td><td>"+abcd[end.charAt(1)]+"</td><td>"+abcd[end.charAt(2)]+"</td><td>"+abcd[end.charAt(3)]+"</td><td>"+abcd[end.charAt(4)]+"</td></tr>";
+    document.getElementById("result").innerHTML=table
+    if (othersthatwork.length==1) {
+    document.getElementById("alert").innerHTML="<div class='alert alert-success' role='alert'>  The program found a solution</div>"
+    return true
+    }
+    else {
+    document.getElementById("alert").innerHTML="<div class='alert alert-warning' role='alert'>  A solution was found, but there are multiple ways to solve. These are:"+othersthatwork.join("\n")+"</div>"
+    return false
+    }
+    }
+    else {
+    document.getElementById("result").innerHTML=""
+    document.getElementById("alert").innerHTML="<div class='alert alert-danger' role='alert'>  No solution was found</div>"
+    return false
+    }
+}</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
